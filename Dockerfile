@@ -1,13 +1,14 @@
 FROM node:16-alpine
 
-USER node
 
-WORKDIR /app
+WORKDIR /usr/cache
 
-COPY package*.json /app
+COPY package*.json ./
 
 RUN npm install
 
-EXPOSE 5000
+WORKDIR /usr/app
 
-CMD ["npm", "run", "dev"]
+USER node
+
+COPY --chown=node:node . /usr/app

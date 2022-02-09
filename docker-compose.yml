@@ -1,12 +1,18 @@
 version: '3'
 
-node:
-  build:
-    context: .
-    dockerfile: Dockerfile
-  container_name: slack_bot
-  port:
-    - 5000:5000
-  environment:
-    NODE_ENV: development
-  user: node
+services:
+  node:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: slack_bot
+    ports:
+      - 5000:5000
+    environment:
+      NODE_ENV: development
+    user: node
+    env_file:
+      - .env
+    volumes:
+      - ./:/usr/app
+    entrypoint: /bin/sh '/usr/app/scripts/start-dev.sh'
