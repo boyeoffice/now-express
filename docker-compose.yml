@@ -1,5 +1,10 @@
 version: '3'
 
+networks:
+  slack-bot-app:
+    driver: bridge
+
+
 services:
   node:
     build:
@@ -16,3 +21,5 @@ services:
     volumes:
       - ./:/usr/app
     entrypoint: /bin/sh '/usr/app/scripts/start-dev.sh'
+    networks:
+      - slack-bot-app
